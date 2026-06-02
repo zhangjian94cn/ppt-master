@@ -202,7 +202,7 @@ _SEMANTIC_PATTERNS: list[tuple[tuple[str, ...], str]] = [
 ]
 
 
-def _semantic_effect(group_id: str | None, idx: int = 0, offset: int = 0) -> str | None:
+def _semantic_effect(group_id: Optional[str], idx: int = 0, offset: int = 0) -> Optional[str]:
     """Return the effect mapped from a group id, or None if no pattern matches.
 
     Image-like ids cycle through ``_IMAGE_POOL`` using ``idx + offset`` so the
@@ -566,7 +566,7 @@ def pick_animation_effect(
     mode: str,
     idx: int,
     offset: int = 0,
-    group_id: str | None = None,
+    group_id: Optional[str] = None,
 ) -> str:
     """Resolve a per-element effect name from a mode string.
 
