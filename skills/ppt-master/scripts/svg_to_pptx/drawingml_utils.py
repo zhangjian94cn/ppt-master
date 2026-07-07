@@ -43,6 +43,10 @@ EA_FONTS = {
     'Source Han Sans JP', 'Source Han Serif JP',
     'WenQuanYi Micro Hei', 'WenQuanYi Zen Hei',
     'YouYuan', 'LiSu', 'HuaWenKaiTi',
+    'LXGW WenKai', 'LXGW WenKai Medium',
+    'ZCOOL KuaiLe',
+    'Wawati SC', 'HanziPen SC', 'Hannotate SC',
+    'Yuanti SC', 'Yuppy SC', 'Xingkai SC', 'Kaiti SC',
     'Songti SC', 'Songti TC',
     # Japanese fonts (Windows-available)
     'Yu Gothic', 'Yu Gothic UI', 'Yu Mincho',
@@ -408,6 +412,10 @@ def parse_font_family(font_family_str: str) -> dict[str, str]:
         win_font = FONT_FALLBACK_WIN.get(font, font)
         if font in EA_FONTS:
             ea_font = ea_font or win_font
+            # CSS fallback lists are ordered by preference. If the preferred
+            # family is CJK-capable, keep it for Latin/digits too instead of
+            # letting a later generic fallback such as Arial split the run.
+            latin_font = latin_font or win_font
         else:
             latin_font = latin_font or win_font
 
